@@ -9,7 +9,10 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
+import { Stock } from '../stock/stock.entity';
+import { Transfer } from '../transfer/transfer.entity';
 
 @Table
 export class Warehouse extends Model<Warehouse> {
@@ -45,6 +48,15 @@ export class Warehouse extends Model<Warehouse> {
 
   @BelongsTo(() => User)
   user: User;
+
+  @HasMany(() => Stock)
+  stock: Stock;
+
+  @HasMany(() => Transfer, 'from_warehouseId')
+  transfers_from: Transfer[];
+
+  @HasMany(() => Transfer, 'to_warehouseId')
+  transfers_to: Transfer[];
 
   //TODO: Foreign Key + relationships
 }
