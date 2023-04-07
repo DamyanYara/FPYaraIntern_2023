@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ProductModule } from './modules/product/product.module';
 import { StockModule } from './modules/stock/stock.module';
 import { WarehouseModule } from './modules/warehouse/warehouse.module';
+import { TransferModule } from './modules/transfer/transfer.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { WarehouseModule } from './modules/warehouse/warehouse.module';
     AuthModule,
     ProductModule,
     WarehouseModule,
-    StockModule, //Adding service to the Users module
+    StockModule,
+    TransferModule, //Adding service to the Users module
   ],
   controllers: [AppController],
   providers: [AppService],
