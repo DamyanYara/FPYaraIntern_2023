@@ -1,4 +1,4 @@
 export class StocktDto {
-  readonly amount: number;
+  readonly amount: number; //stock level at warehouse
   readonly date: Date;
 }
