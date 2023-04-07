@@ -1,4 +1,3 @@
-import { Warehouse } from '../warehouse/warehouse.entity';
 import {
   Table,
   Column,
@@ -9,7 +8,9 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
+import { Stock } from '../stock/stock.entity';
 
 @Table
 export class Product extends Model<Product> {
@@ -26,6 +27,12 @@ export class Product extends Model<Product> {
   })
   name: string;
 
+  @AllowNull
+  @Column({
+    type: DataType.TEXT,
+  })
+  description: string;
+
   @Column({ defaultValue: false })
   is_hazardous: boolean;
 
@@ -35,19 +42,9 @@ export class Product extends Model<Product> {
   })
   sizeUnit: number;
 
-  @ForeignKey(() => Warehouse)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-    references: {
-      model: Warehouse,
-      key: 'id',
-    },
-  })
-  warehouseId: number;
+  @HasMany(() => Stock)
+  stock: Stock;
 
-  @BelongsTo(() => Warehouse)
-  warehouse: Warehouse;
-
-  //TODO: Foreign Key + relationships
+  //TODO: Foreign Key + relationships to Table Transfers
+  // One-To Many relationship with "Stock" wich
 }

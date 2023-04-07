@@ -13,8 +13,8 @@ export class ProductService {
   async create(product: ProductDto): Promise<Product> {
     return await this.productRepository.create<Product>(product);
   }
-  // Find Product By ID
-  async findOneById(id: number): Promise<Product> {
-    return await this.productRepository.findOne<Product>({ where: { id } });
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async findAll(id: number): Promise<Product[]> {
+    return await this.productRepository.findAll<Product>();
   }
 }
