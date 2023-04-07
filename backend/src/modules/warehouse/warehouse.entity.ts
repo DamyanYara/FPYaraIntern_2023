@@ -9,10 +9,7 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
-  HasMany,
 } from 'sequelize-typescript';
-import { Product } from '../product/product.entity';
-import { Stock } from '../stock/stock.entity';
 
 @Table
 export class Warehouse extends Model<Warehouse> {
@@ -28,9 +25,6 @@ export class Warehouse extends Model<Warehouse> {
     type: DataType.TEXT,
   })
   name: string;
-
-  @Column({ defaultValue: false })
-  is_hazardous: boolean;
 
   @AllowNull
   @Column({
@@ -51,12 +45,6 @@ export class Warehouse extends Model<Warehouse> {
 
   @BelongsTo(() => User)
   user: User;
-
-  @HasMany(() => Product)
-  products: Product;
-
-  @HasMany(() => Stock)
-  stocks: Stock;
 
   //TODO: Foreign Key + relationships
 }
