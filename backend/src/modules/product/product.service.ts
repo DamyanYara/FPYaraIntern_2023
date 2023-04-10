@@ -14,7 +14,7 @@ export class ProductService {
     return await this.productRepository.create<Product>(product);
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async findAll(id: number): Promise<Product[]> {
+  async findAll(): Promise<Product[]> {
     return await this.productRepository.findAll<Product>();
   }
 }

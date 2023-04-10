@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Transfer } from './transfer.entity';
 import { TransfertDto } from './dto/transfer.dto';
 import { TRANSFER_REPOSITORY } from 'src/core/constants';
+import { Product } from '../product/product.entity';
 
 @Injectable()
 export class TransferService {
