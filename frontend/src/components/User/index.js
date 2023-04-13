@@ -1,25 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import useUsersContext from "../../hooks/use-user-context";
 import { StyledUserForm } from "./style.css";
 import { StyledLabel } from "./style.css";
+import { StyledButton } from "./style.css";
+
 
 
 function User(){
+    const navigate = useNavigate();
     // eslint-disable-next-line no-unused-vars
     const [userInput, setUserInput] = useState({
         username: '',
         password: '',
     });
-    const [userSignup, setUserSignup]= useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-    });
+    
 
     // eslint-disable-next-line no-unused-vars
     const {login} = useUsersContext();
-    const {signup} = useUsersContext();
+    
 
     const handleChange = (event) => {
         setUserInput({
@@ -33,7 +32,7 @@ function User(){
         event.preventDefault();
         login(userInput);
         console.log(userInput);
-    }
+    };
 
     return (
     //<div className="container">
@@ -44,8 +43,10 @@ function User(){
             <StyledLabel for= "password"><b>Password</b></StyledLabel>
             <input type="password" placeholder="Enter Password" name="password" onChange={handleChange} required></input>
 
-            <button type="submit">Login</button>
+            <StyledButton type="submit">Login</StyledButton>
+            <label onClick={()=> {navigate('/userSingup')}}>You havent sign up yet? Sign Up</label>
         </StyledUserForm>
+        // label You dent have account  onclick => navigate(path Page/Component)
    // </div>
     )
     //TODO create signup Form & Logout, add to the frontpage

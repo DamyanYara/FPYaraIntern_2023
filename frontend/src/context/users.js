@@ -37,12 +37,13 @@ const  Provider = ({children}) => {
         
     };
 
-    const signup = async(firstName, lastName, email, password) => {
+    const signup = async({firstName, lastName, email, password}) => {
         try{
-            const response = await axios.post('http://localhost:3000/auth/signup', {firstName,lastName,email,password});
+            const response = await axios.post('http://localhost:8080/auth/signup', {firstName,lastName,email,password});
             const {data} =response;
 
             localStorage.setItem('token', data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
             setUser(data.user);
         }catch (error) {
             console.error(error)

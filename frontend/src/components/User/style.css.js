@@ -14,3 +14,8 @@ export const StyledLabel = styled.label`
 margin-bottom: 10px;
 color: #008b8b
 `;
+
+export const StyledButton = styled.button`
+margin-top:10px;
+color:  #008b8b
+`;

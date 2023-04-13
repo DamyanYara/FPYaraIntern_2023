@@ -17,6 +17,7 @@ export class AuthController {
   // creating User and return JWT token
   @Post('signup')
   async signUp(@Body() user: UserDto) {
+    console.log(user);
     return await this.authService.create(user);
   }
 }
