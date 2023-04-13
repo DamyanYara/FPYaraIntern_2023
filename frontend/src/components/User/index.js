@@ -10,8 +10,16 @@ function User(){
         username: '',
         password: '',
     });
+    const [userSignup, setUserSignup]= useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+    });
+
     // eslint-disable-next-line no-unused-vars
     const {login} = useUsersContext();
+    const {signup} = useUsersContext();
 
     const handleChange = (event) => {
         setUserInput({
@@ -40,6 +48,7 @@ function User(){
         </StyledUserForm>
    // </div>
     )
+    //TODO create signup Form & Logout, add to the frontpage
 }
 
 export default User
