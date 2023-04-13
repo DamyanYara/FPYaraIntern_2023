@@ -21,10 +21,12 @@ export class UsersService {
     return await this.userRepository.findOne<User>({ where: { id } });
   }
   // Finding all Users by ID
+  /*
   async findAll(id: number): Promise<User[]> {
     return await this.userRepository.findAll<User>();
   }
   //TODO:
   //loginCheck validation if token available
   //signToken
+}*/
 }

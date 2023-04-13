@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
@@ -13,34 +13,50 @@ export class AuthService {
   async validateUser(username: string, pass: string) {
     const user = await this.usersService.findOneByEmail(username);
     if (!user) {
-      return null;
+      throw new BadRequestException('Wrong credentials');
     }
     //check the database with the provided from user password returns user object
     const passwordMatch = await this.comparePassword(pass, user.password);
     if (!passwordMatch) {
-      return null;
+      throw new BadRequestException('Wrong credentials');
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...result } = user['dataValues'];
-    return result;
+    // const { password, ...result } = user['dataValues'];
+    // return result;
   }
   // login the user, takes user info and token and returns token and user object
   public async login(user) {
+    // check if the user exist
+    await this.validateUser(user.username, user.password);
     const token = await this.generateToken(user);
-    return { user, token };
+    return { username: user.username, token };
   }
+  /*
+    const result = await this.validateUser(user.username, user.pass);
+    if (result === null) {
+      return new BadRequestException();
+    }
+  */
+
+  //Crerating
 
   public async create(user) {
     const pass = await this.hashPassword(user.password); //hash the pass
 
+    const userCheck = await this.usersService.findOneByEmail(user.email);
+    if (userCheck) {
+      return new BadRequestException('This email is not unique');
+    }
+
     const newUser = await this.usersService.create({ ...user, password: pass }); //create user
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    //deconstructoring returning the user without the password
     const { password, ...result } = newUser['dataValues'];
 
     const token = await this.generateToken(result); //generate token
 
-    return { user: result, token };
+    return { user: result, token }; //remove token
   }
 
   private async generateToken(user) {

@@ -34,6 +34,7 @@ export class User extends Model<User> {
   @AllowNull
   @Column({
     type: DataType.TEXT,
+    unique: true,
   })
   email: string;
 

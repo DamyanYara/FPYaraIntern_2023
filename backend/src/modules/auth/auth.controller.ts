@@ -7,10 +7,12 @@ import { UserDto } from '../users/dto/user.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
   // Validate method in local strategy by using email, username and password
-  @UseGuards(AuthGuard('local'))
+  //@UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() req) {
-    return await this.authService.login(req.user);
+  login(@Request() req) {
+    //userCredentials: userCredentials
+    //
+    return this.authService.login(req.body);
   }
   // creating User and return JWT token
   @Post('signup')
@@ -18,3 +20,9 @@ export class AuthController {
     return await this.authService.create(user);
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+//interface userCredentials {
+//name: string;
+//paswword: string;
+//}
